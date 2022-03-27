@@ -155,8 +155,9 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt              
-      - auto-destruct-env:
-          fail_only: true             
+      - auto-destruct-env
+      - when:
+          on_fail: true             
 
 workflows:
   default:

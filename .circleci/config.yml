@@ -200,7 +200,19 @@ jobs:
       
       - attach_workspace:
           at: ~/
-             
+          
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt-get -y -qq update
+            
+      - run:
+          name: awscli install
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get -y -qq install python3
+            sudo apt-get -qq install awscli
+                   
       - run:
           name: Run migrations and save status to https://memstash.io/
           command: |
@@ -209,8 +221,9 @@ jobs:
             npm audit fix --force
             npm run migrations > migrations.txt            
             cat migrations.txt
-    
-            
+            npm audit fix --audit-level=critical --force
+            npm audit --audit-level=critical             
+               
   deploy-frontend:
     docker:
       # Docker image here that supports AWS CLI

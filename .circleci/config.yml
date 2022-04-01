@@ -243,16 +243,7 @@ jobs:
               else
                 exit 1
               fi
-            exit 1
-      # Here's where you will add some code to rollback on failure
-      - run:
-          name: Install AWS CLI for rollback
-          when: on_fail
-          command: |
-            sudo apt-get -y -qq update
-            sudo apt-get -y -qq install python3
-            sudo apt-get -qq install awscli
-      - destroy-environment            
+            exit 1      
                
 workflows:
   default:
